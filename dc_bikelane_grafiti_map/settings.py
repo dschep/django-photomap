@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'photomap',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,3 +82,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+PHOTOMAP_OPTIONS = {
+    'MAP_CENTER': [38.91, -77.04],
+    'DEFAULT_ZOOM': 13,
+    'MAP_TITLE': 'DC Bike Lane Graffiti'
+}

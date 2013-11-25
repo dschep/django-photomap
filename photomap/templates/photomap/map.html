@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ MAP_TITLE }}</title>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" /><![endif]-->
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/photomap.css">
+    <script>
+        window.MAP_CENTER = {{ MAP_CENTER }};
+        window.DEFAULT_ZOOM = {{ DEFAULT_ZOOM }};
+    </script>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+    <script src="{{ STATIC_URL }}js/photomap.js"></script>
+</body>
+</html>

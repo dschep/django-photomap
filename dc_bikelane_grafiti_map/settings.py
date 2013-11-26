@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'south',
+
     'photomap',
 )
 
@@ -82,6 +84,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
 
 PHOTOMAP_OPTIONS = {
     'MAP_CENTER': [38.91, -77.04],

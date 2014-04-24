@@ -23,7 +23,7 @@ class Photo(models.Model):
 
         if tags['GPSInfo'][1] != 'N':
             lat *= -1
-        if tags['GPSInfo'][1] != 'E':
+        if tags['GPSInfo'][3] != 'E':
             lng *= -1
 
         return [lat, lng]

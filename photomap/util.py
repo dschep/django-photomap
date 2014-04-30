@@ -25,7 +25,7 @@ def latlng_from_exif(photo_path):
     return lat, lng
 
 def point_from_exif(photo_path):
-    return geometry.Point(latlng_from_exif(photo_path))
+    return geometry.Point(*reversed(latlng_from_exif(photo_path)))
 
 def geojson_from_exif(photo_path):
     return {

@@ -10,4 +10,5 @@ class PhotoResource(MultipartResource, ModelResource):
 
     def dehydrate_location(self, bundle):
         """ flip coordinate order since leaflet expects lat,lng not lng,lat """
-        return [bundle.obj.location.y, bundle.obj.location.x]
+        if bundle.obj.location is not None:
+            return [bundle.obj.location.y, bundle.obj.location.x]

@@ -6,8 +6,12 @@
                 }).addTo(map)
     $.getJSON('/api/v1/photo/?format=json&limit=0', function(data) {
         $.each(data.objects, function(i, item) {
-            L.marker(item.location).addTo(map)
-                .bindPopup('<img width=300 src="' + item.image + '">');
+            L.geoJson(item.location, {
+                pointToLayer: function (feature, latlng) {
+                    return L.marker(latlng)
+                        .bindPopup('<img width=300 src="' + item.image + '">');
+                }
+            }).addTo(map);
         });
     });
 })()

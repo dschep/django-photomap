@@ -3,7 +3,7 @@ from PIL import Image
 from PIL.ExifTags import TAGS
 from tastypie.authorization import Authorization, Unauthorized
 
-def point_from_exif(photo_path):
+def latlng_from_exif(photo_path):
     tags = {TAGS.get(t): v for t, v in
             Image.open(photo_path)._getexif().items()}
 
@@ -22,8 +22,16 @@ def point_from_exif(photo_path):
     if tags['GPSInfo'][3] != 'E':
         lng *= -1
 
-    return geometry.Point(x=lng, y=lat, srid=4326)
+    return lat, lng
 
+def point_from_exif(photo_path):
+    return geometry.Point(latlng_from_exif(photo_path))
+
+def geojson_from_exif(photo_path):
+    return {
+        'coordinates': list(latlng_from_exif(photo_path)),
+        'type': 'Point'
+    }
 
 class MultipartResource(object):
     def deserialize(self, request, data, format=None):

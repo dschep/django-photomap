@@ -4,10 +4,9 @@ from .models import Photo
 
 
 class PhotoResource(ModelResource):
-    location = fields.CharField(attribute='location', readonly=True)
     class Meta:
         queryset = Photo.objects.all()
 
     def dehydrate_location(self, bundle):
-        """ Don't dehydrate the list, it's already valid """
-        return bundle.obj.location
+        """ flip coordinate order since leaflet expects lat,lng not lng,lat """
+        return [bundle.obj.location.y, bundle.obj.location.x]

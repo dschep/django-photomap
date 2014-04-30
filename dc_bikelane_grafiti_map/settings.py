@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
 
     'south',
     'tastypie',
@@ -60,12 +61,14 @@ WSGI_APPLICATION = 'dc_bikelane_grafiti_map.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+# TODO: Split out into separate settings file
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'dcbikelanegraffiti',
     }
 }
+POSTGIS_VERSION = (2, 1, 2)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

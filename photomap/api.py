@@ -1,9 +1,10 @@
 from tastypie.resources import ModelResource
 from tastypie import fields
 from .models import Photo
+from .util import MultipartResource
 
 
-class PhotoResource(ModelResource):
+class PhotoResource(MultipartResource, ModelResource):
     class Meta:
         queryset = Photo.objects.all()
 

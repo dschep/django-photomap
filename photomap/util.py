@@ -22,3 +22,24 @@ def point_from_exif(photo_path):
         lng *= -1
 
     return geometry.Point(x=lng, y=lat, srid=4326)
+
+
+class MultipartResource(object):
+    def deserialize(self, request, data, format=None):
+        if not format:
+            format = request.META.get('CONTENT_TYPE', 'application/json')
+
+        if format == 'application/x-www-form-urlencoded':
+            return request.POST
+        if format.startswith('multipart'):
+            data = request.POST.copy()
+            data.update(request.FILES)
+            return data
+
+        return super(MultipartResource, self).deserialize(request, data, format)
+
+    def post_list(self, request, **kwargs):
+        if not hasattr(request, '_body') and request.META.get('CONTENT_TYPE').startswith('multipart'):
+            request._body = request.POST
+
+        return super(MultipartResource, self).post_list(request, **kwargs)

@@ -57,6 +57,8 @@ ROOT_URLCONF = 'dc_bikelane_grafiti_map.urls'
 
 WSGI_APPLICATION = 'dc_bikelane_grafiti_map.wsgi.application'
 
+# so that anonymous users get session ids too
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

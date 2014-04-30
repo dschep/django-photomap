@@ -1,6 +1,7 @@
 from django.contrib.gis.geos import geometry
 from PIL import Image
 from PIL.ExifTags import TAGS
+from tastypie.authorization import Authorization, Unauthorized
 
 def point_from_exif(photo_path):
     tags = {TAGS.get(t): v for t, v in
@@ -43,3 +44,28 @@ class MultipartResource(object):
             request._body = request.POST
 
         return super(MultipartResource, self).post_list(request, **kwargs)
+
+
+class UserSessionKeyAuthorization(Authorization):
+    def create_list(self, object_list, bundle):
+        if bundle.request.session.session_key is None:
+            raise Unauthorized('You must have a sessionid cookie set')
+        return super(UserSessionKeyAuthorization, self).create_list(object_list, bundle)
+
+    def create_detail(self, object_list, bundle):
+        return bundle.request.session.session_key is not None
+
+    def update_list(self, object_list, bundle):
+        if bundle.request.session.session_key is None:
+            raise Unauthorized('You must have a sessionid cookie set')
+        return object_list.filter(user_session_key=bundle.request.session.session_key)
+
+    def update_detail(self, object_list, bundle):
+        return bundle.obj.user_session_key == bundle.request.session.session_key \
+                and bundle.request.session.session_key is not None
+
+    def delete_list(self, object_list, bundle):
+        raise Unauthorized("Sorry, no deletes.")
+
+    def delete_detail(self, object_list, bundle):
+        raise Unauthorized("Sorry, no deletes.")

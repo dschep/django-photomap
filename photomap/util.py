@@ -6,8 +6,10 @@ from tastypie.authorization import Authorization, Unauthorized
 class NoGPSInfoException(Exception): pass
 
 def latlng_from_exif(photo_path):
-    tags = {TAGS.get(t): v for t, v in
-            Image.open(photo_path)._getexif().items()}
+    image = Image.open(photo_path)
+    if not hasattr(image, '_getexif'):
+        raise NoGPSInfoException
+    tags = {TAGS.get(t): v for t, v in image._getexif().items()}
 
     if 2 not in tags['GPSInfo'] or 4 not in tags['GPSInfo']:
         raise NoGPSInfoException

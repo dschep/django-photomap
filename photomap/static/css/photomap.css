@@ -6,3 +6,11 @@ html, body, #map {
     margin:0px;
 } 
 
+/* push down controls so they aren't under the navbar */
+#map .leaflet-top {
+    top: 50px;
+}
+
+.navbar {
+    background: rgba(0, 0, 0, .8);
+}

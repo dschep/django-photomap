@@ -35,7 +35,7 @@ def point_from_exif(photo_path):
 
 def geojson_from_exif(photo_path):
     return {
-        'coordinates': list(latlng_from_exif(photo_path)),
+        'coordinates': list(reversed(latlng_from_exif(photo_path))),
         'type': 'Point'
     }
 

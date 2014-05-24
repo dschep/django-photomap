@@ -43,33 +43,32 @@
 
     <div id="map"></div>
 
-<div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="upload-modal-label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="upload-modal-label">Add an image!</h4>
-      </div>
-      <div class="modal-body">
-        <form id="upload-form">
-          <label>Choose file: <input type="file" name="image"></label>
-        </form>
-        <form id="update-form" style="display:none">
-          <p class="bg-warning" style="padding:15px">No GPS info was found in the image, enter it here.</p>
-          <label>Latitude: <input name="lat"></label>
-          <label>Longitude: <input name="lng"></label>
-          <input name="resource_uri" type="hidden">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-        <button form="upload-form" type="submit" class="btn btn-primary" id="upload-submit">Upload Image</button>
-        <button form="update-form" type="submit" class="btn btn-primary" id="update-submit" style="display:none">Add Geolocation Info</button>
-      </div>
+    <div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="upload-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="upload-modal-label">Add an image!</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="upload-form">
+                        <label>Choose file: <input type="file" name="image"></label>
+                    </form>
+                    <form id="update-form" style="display:none">
+                        <p class="bg-warning" style="padding:15px">No GPS info was found in the image, enter it here.</p>
+                        <label>Latitude: <input name="lat"></label>
+                        <label>Longitude: <input name="lng"></label>
+                        <input name="resource_uri" type="hidden">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+                    <button form="upload-form" type="submit" class="btn btn-primary" id="upload-submit">Upload Image</button>
+                    <button form="update-form" type="submit" class="btn btn-primary" id="update-submit" style="display:none">Add Geolocation Info</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-</div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>

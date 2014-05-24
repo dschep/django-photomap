@@ -32,7 +32,10 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="#about">About</a></li>
-            <li><a href="#upload-modal" data-toggle="modal">Add an image!</a></li>
+            <!-- TODO: Test the show/hide onclick/modal interaction -->
+            <li><a href="#upload-modal" data-toggle="modal"
+              onclick="$('#upload-form,#upload-submit').show();$('#update-form,#update-submit').hide();">
+              Add an image!</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

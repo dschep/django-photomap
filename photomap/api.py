@@ -1,10 +1,7 @@
 from tastypie.contrib.gis.resources import ModelResource
-from tastypie.authorization import Authorization
-from tastypie import fields
 from .models import Photo
 from .util import (MultipartResource, UserSessionKeyAuthorization,
                    geojson_from_exif, NoGPSInfoException)
-from django.contrib.gis.geos import geometry
 
 
 class PhotoResource(MultipartResource, ModelResource):

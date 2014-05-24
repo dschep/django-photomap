@@ -6,7 +6,7 @@
                 }).addTo(map)
 
     var layers = [];
-    window.get_pins = function() {
+    var get_pins = function() {
         $.getJSON('/api/v1/photo/?limit=0', function(data) {
             $.each(layers, function(i, item) { map.removeLayer(item); });
             layers = [];

@@ -96,5 +96,17 @@ MEDIA_URL = '/media/'
 PHOTOMAP_OPTIONS = {
     'MAP_CENTER': [38.91, -77.04],
     'DEFAULT_ZOOM': 13,
-    'MAP_TITLE': 'DC Bike Lane Graffiti'
+    'MAP_TITLE': 'DC Bike Lane Graffiti',
+    'ABOUT': """
+        <p>
+            This is an effort to document all the cool graffiti, sidewalk
+            chalk, etc. that is found in Washington, DC bike lanes.
+        </p>
+        <p>
+            Built by <a href="http://github.com/dschep">Daniel Schep</a> using
+            Leaflet, Bootstrap, Django & GeoDjango. Souce available on
+            <a href="http://github.com/dschep/dc-bikelane-graffiti-map"
+                target="_blank">Github</a>.
+        </p>
+    """,
 }

@@ -31,7 +31,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#about">About</a></li>
+            <li><a href="#about" data-toggle="modal">About</a></li>
             <!-- TODO: Test the show/hide onclick/modal interaction -->
             <li><a href="#upload-modal" data-toggle="modal"
               onclick="$('#upload-form,#upload-submit').show();$('#update-form,#update-submit').hide();">
@@ -65,6 +65,23 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
                     <button form="upload-form" type="submit" class="btn btn-primary" id="upload-submit">Upload Image</button>
                     <button form="update-form" type="submit" class="btn btn-primary" id="update-submit" style="display:none">Add Geolocation Info</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="about-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="upload-modal-label">About {{ MAP_TITLE }}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ ABOUT|safe }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Awesome!</button>
                 </div>
             </div>
         </div>

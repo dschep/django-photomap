@@ -31,10 +31,8 @@
                 $('#upload-modal').modal('hide');
             } else {
                 $('[name=resource_uri]').val(url);
-                $('#upload-form').hide();
-                $('#update-form').show();
-                $('#upload-submit').hide();
-                $('#update-submit').show();
+                $('#upload-form,#upload-submit').hide();
+                $('#update-form,#update-submit').show();
             }
         });
     };

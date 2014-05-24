@@ -24,6 +24,18 @@
     };
     get_pins();
 
+    var latlong_input_map = L.map('latlong-input-map').setView(window.MAP_CENTER, window.DEFAULT_ZOOM);
+
+    L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenCycleMap, Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+                }).addTo(latlong_input_map)
+
+    $().change(function () { // TODO: change this to the correct leaflet binding
+        $('#update-form [name=lat]').val(null); // TODO: change to right data src
+        $('#update-form [name=lng]').val(null); // TODO: change to right data src
+    });
+
+
     var get_more_info = function(url) {
         $.getJSON(url, function(data) {
             if (data.location) {

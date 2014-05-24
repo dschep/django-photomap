@@ -55,9 +55,13 @@
           <label>Choose file: <input type="file" name="image"></label>
         </form>
         <form id="update-form" style="display:none">
-          <p class="bg-warning" style="padding:15px">No GPS info was found in the image, enter it here.</p>
-          <label>Latitude: <input name="lat"></label>
-          <label>Longitude: <input name="lng"></label>
+          <p class="bg-warning" style="padding:15px">
+            No GPS info was found in the image metadata.
+            Click on the map below to set where this image was taken.
+          </p>
+          <div id="latlong-input-map"></div>
+          <input name="lat" type="hidden">
+          <input name="lng" type="hidden">
           <input name="resource_uri" type="hidden">
         </form>
       </div>

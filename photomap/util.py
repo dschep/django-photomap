@@ -103,9 +103,10 @@ class UserSessionKeyAuthorization(Authorization):
                 and bundle.request.session.session_key is not None
 
     def delete_list(self, object_list, bundle):
-        # TODO
-        raise Unauthorized("Sorry, no deletes.")
+        if bundle.request.session.session_key is None:
+            raise Unauthorized('You must have a sessionid cookie set')
+        return object_list.filter(user_session_key=bundle.request.session.session_key)
 
     def delete_detail(self, object_list, bundle):
-        # TODO
-        raise Unauthorized("Sorry, no deletes.")
+        return bundle.obj.user_session_key == bundle.request.session.session_key \
+                and bundle.request.session.session_key is not None

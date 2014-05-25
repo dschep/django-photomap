@@ -24,6 +24,29 @@
     };
     get_pins();
 
+    var latlong_input_map = L.map('latlong-input-map').setView(window.MAP_CENTER, window.DEFAULT_ZOOM);
+
+    L.tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenCycleMap, Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+                }).addTo(latlong_input_map)
+
+    var input_latlong_marker = null;
+    function onMapClick(e) {
+        if (input_latlong_marker !== null) return;
+
+        input_latlong_marker = L.marker(e.latlng, {draggable:'true'});
+        input_latlong_marker.on('dragend', function(event){
+            var marker = event.target;
+            var position = marker.getLatLng();
+            marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+            $('[name=lat]').val(position.lat);
+            $('[name=lng]').val(position.lng);
+        });
+        latlong_input_map.addLayer(input_latlong_marker);
+    };
+    latlong_input_map.on('click', onMapClick);
+
+
     var get_more_info = function(url) {
         $.getJSON(url, function(data) {
             if (data.location) {
@@ -33,6 +56,7 @@
                 $('[name=resource_uri]').val(url);
                 $('#upload-form,#upload-submit').hide();
                 $('#update-form,#update-submit').show();
+                latlong_input_map.invalidateSize()
             }
         });
     };
@@ -72,6 +96,7 @@
               processData: false,
               success: function(data, textStatus, xhr) {
                   $('#upload-modal').modal('hide');
+                  get_pins();
               },
               error: function() {
                   alert('Uh.. bad gps??!')

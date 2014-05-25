@@ -14,3 +14,8 @@ html, body, #map {
 .navbar {
     background: rgba(0, 0, 0, .8);
 }
+
+#latlong-input-map {
+    width: 100%;
+    height: 400px;
+}

@@ -22,9 +22,9 @@ class MapView(TemplateView):
         return context
 
 def thumb(request, image_id):
-    image = get_object_or_404(Photo, pk=image_id).image
-    #image.resize()
+    image = Image.open(get_object_or_404(Photo, pk=image_id).image.path)
+    image.thumbnail((50,50))
     strio = StringIO()
-    image.save(strio)
+    image.save(strio, 'JPEG')
     strio.seek(0)
-    return HttpResponse(strio)#, content_type=??)
+    return HttpResponse(strio, content_type='image/jpeg')

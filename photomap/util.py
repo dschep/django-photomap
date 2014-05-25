@@ -61,6 +61,29 @@ class MultipartResource(object):
 
 
 class UserSessionKeyAuthorization(Authorization):
+    """
+    An authorizaion model that allows anyone with a sessionid to create
+    objects and then alter the objects created with the same sessionid.
+
+    It requires that the sessionid cookie is set. Used in combination with
+    `SESSION_SAVE_EVERY_REQUEST = True` it allows for anonymous users to create
+    and edit objects
+
+    Usage requires that the model being served has a field that contains
+    session IDs. It must be specified using the `'session_key_field'`.
+
+    The Resource being used must also then ensure that that field is present in
+    data when calling obj_create. E.g.:
+
+    def obj_create(self, bundle, **kwargs):
+        return super(ExampleResource, self).obj_create(
+                bundle, user_session_key=bundle.request.session.session_key)
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.field = kwargs.pop('session_key_field')
+        super(UserSessionKeyAuthorization, self).__init__(*args, **kwargs)
+
     def create_list(self, object_list, bundle):
         if bundle.request.session.session_key is None:
             raise Unauthorized('You must have a sessionid cookie set')
@@ -72,14 +95,18 @@ class UserSessionKeyAuthorization(Authorization):
     def update_list(self, object_list, bundle):
         if bundle.request.session.session_key is None:
             raise Unauthorized('You must have a sessionid cookie set')
-        return object_list.filter(user_session_key=bundle.request.session.session_key)
+        return object_list.filter(
+                **{self.field: bundle.request.session.session_key})
 
     def update_detail(self, object_list, bundle):
-        return bundle.obj.user_session_key == bundle.request.session.session_key \
+        return getattr(bundle.obj, self.field) == bundle.request.session.session_key \
                 and bundle.request.session.session_key is not None
 
     def delete_list(self, object_list, bundle):
-        raise Unauthorized("Sorry, no deletes.")
+        if bundle.request.session.session_key is None:
+            raise Unauthorized('You must have a sessionid cookie set')
+        return object_list.filter(user_session_key=bundle.request.session.session_key)
 
     def delete_detail(self, object_list, bundle):
-        raise Unauthorized("Sorry, no deletes.")
+        return bundle.obj.user_session_key == bundle.request.session.session_key \
+                and bundle.request.session.session_key is not None

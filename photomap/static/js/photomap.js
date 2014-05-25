@@ -96,6 +96,7 @@
               processData: false,
               success: function(data, textStatus, xhr) {
                   $('#upload-modal').modal('hide');
+                  get_pins();
               },
               error: function() {
                   alert('Uh.. bad gps??!')

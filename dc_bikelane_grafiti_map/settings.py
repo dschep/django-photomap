@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'south',
     'tastypie',
 
+    'dc_bikelane_grafiti_map',
     'photomap',
 )
 
@@ -109,4 +110,5 @@ PHOTOMAP_OPTIONS = {
                 target="_blank">Github</a>.
         </p>
     """,
+    'LOGO': 'logo.png',
 }

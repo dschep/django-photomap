@@ -14,6 +14,9 @@ html, body, #map {
 .navbar {
     background: rgba(0, 0, 0, .8);
 }
+.navbar-brand {
+    padding: 0;
+}
 
 #latlong-input-map {
     width: 100%;

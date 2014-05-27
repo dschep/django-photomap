@@ -14,3 +14,10 @@ html, body, #map {
 .navbar {
     background: rgba(0, 0, 0, .8);
 }
+
+.thumb-marker {
+    border: 1px solid white;
+    -webkit-box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.94);
+    -moz-box-shadow:    1px 1px 15px 1px rgba(0, 0, 0, 0.94);
+    box-shadow:         1px 1px 15px 1px rgba(0, 0, 0, 0.94);
+}

@@ -13,9 +13,10 @@
             $.each(data.objects, function(i, item) {
                 var layer = L.geoJson(item.location, {
                     pointToLayer: function (feature, latlng) {
-                        var thumb = L.icon({
-                            iconUrl: '/thumb/' + item.id,
-                            // TODO: anchors: compute? Shadow: css?
+                        var thumb = L.divIcon({
+                            className: 'thumb-marker',
+                            html: '<img src="/thumb/' + item.id + '">',
+                            iconSize: [52, 52]
                         });
                         return L.marker(latlng, {icon: thumb})
                             .bindPopup('<img width=300 src="' + item.image + '">');

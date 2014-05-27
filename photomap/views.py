@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 
-from PIL import Image
+from PIL import Image, ImageOps
 
 from .models import Photo
 
@@ -23,8 +23,8 @@ class MapView(TemplateView):
 
 def thumb(request, image_id):
     image = Image.open(get_object_or_404(Photo, pk=image_id).image.path)
-    image.thumbnail((50,50))
+    thumb = ImageOps.fit(image, (50, 50) , Image.ANTIALIAS)
     strio = StringIO()
-    image.save(strio, 'JPEG')
+    thumb.save(strio, 'JPEG')
     strio.seek(0)
     return HttpResponse(strio, content_type='image/jpeg')

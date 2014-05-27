@@ -60,6 +60,8 @@
 
     var get_more_info = function(url) {
         $.getJSON(url, function(data) {
+            $holder.removeClass('uploading')
+                .html('<h1>Drag file here to upload.</h1>')
             if (data.location) {
                 get_pins();
                 $('#upload-modal').modal('hide');
@@ -117,4 +119,76 @@
         });
         return false;
     });
+
+
+    var tests = {
+            filereader: typeof FileReader != 'undefined',
+            dnd: 'draggable' in document.createElement('span'),
+            formdata: !!window.FormData,
+        },
+        acceptedTypes = {
+            'image/png': true,
+            'image/jpeg': true,
+            'image/gif': true
+        }
+        holder = document.getElementById('upload-container'),
+        $holder = $('#upload-container');
+
+    var supported = true;
+    for (var i in tests) {
+        if (!tests[i]) supported = false;
+    }
+    if (supported) {
+        $('.fallback').hide();
+
+        function previewfile(file) {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                $holder.html(
+                        $('<img width="250">').attr('src', event.target.result));
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function readfiles(files) {
+            var formData = tests.formdata ? new FormData() : null;
+            formData.append('image', files[0]);
+            previewfile(files[0]);
+
+            // now post a new XHR request
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/v1/photo/');
+            xhr.onload = function() {
+                get_more_info(xhr.getResponseHeader('Location'));
+            };
+            xhr.onerror = function () {
+                alert('Failed to upload file!');
+            };
+
+            $holder.addClass('uploading');
+
+            xhr.send(formData);
+        }
+
+        // TODO: jQuery-fy?, seems to have issue with e.dataTransfer
+        holder.ondragover = function () { this.className = 'hover'; return false; };
+        holder.ondragend = function () { this.className = ''; return false; };
+        holder.ondrop = function (e) {
+            this.className = '';
+            e.preventDefault();
+            readfiles(e.dataTransfer.files);
+        }
+
+    } else if (tests.formdata) {
+        $holder.hide();
+        $('.fallback input').change(function() {
+            $(this).parents('form').submit();
+        })
+        $('.fallback').show();
+    } else {
+        $holder.hide();
+        $('.fallback').hide();
+        $('.unsupported').show();
+    }
 })()

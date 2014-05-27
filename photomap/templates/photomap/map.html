@@ -52,7 +52,14 @@
                 </div>
                 <div class="modal-body">
                     <form id="upload-form">
-                        <label>Choose file: <input type="file" name="image"></label>
+                        <div id="upload-container"><h1>
+                                Drag file here to upload.</h1></div>
+
+                        <label class="fallback">Choose file: <input type="file" name="image"></label>
+                        <p class="unsupported" style="display:none">
+                            Sorry, you must use at least IE 10 to add images to
+                            the map.
+                        </p>
                     </form>
                     <form id="update-form" style="display:none">
                         <p class="bg-warning" style="padding:15px">
@@ -67,7 +74,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-                    <button form="upload-form" type="submit" class="btn btn-primary" id="upload-submit">Upload Image</button>
                     <button form="update-form" type="submit" class="btn btn-primary" id="update-submit" style="display:none">Add Geolocation Info</button>
                 </div>
             </div>

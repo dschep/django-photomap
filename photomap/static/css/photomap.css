@@ -39,3 +39,27 @@ html, body, #map {
 .leaflet-popup-content {
     margin: 2px 2px;
 }
+
+/* dnd upload */
+#upload-container {
+    line-height: 280px;
+    text-align: center;
+    border: 10px dashed #ccc;
+    width: 500px;
+    min-height: 300px;
+    margin: 0 auto;
+}
+#upload-container h1 {
+    line-height: 250px;
+}
+#upload-container.hover { border: 10px dashed #0c0; }
+#upload-container img { display: block; margin: 10px auto; opacity: .5; }
+#upload-container p { margin: 10px; font-size: 14px; }
+#upload-container.uploading:after {
+    content: "Uploading...";
+    display: block;
+    position: absolute;
+    top: 32px;
+    left: 137px;
+    font-size: 60px;
+}

@@ -13,8 +13,14 @@
             $.each(data.objects, function(i, item) {
                 var layer = L.geoJson(item.location, {
                     pointToLayer: function (feature, latlng) {
-                        return L.marker(latlng)
-                            .bindPopup('<img width=300 src="' + item.image + '">');
+                        var thumb = L.divIcon({
+                            className: 'thumb-marker',
+                            html: '<img src="/thumb/' + item.id + '">',
+                            iconSize: [52, 52]
+                        });
+                        return L.marker(latlng, {icon: thumb})
+                            .bindPopup(L.popup({maxWidth: '500px'})
+                                .setContent('<img width="500px" src="' + item.image + '">'));
                     }
                 });
                 layers.push(layer);

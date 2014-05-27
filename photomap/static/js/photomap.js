@@ -106,6 +106,8 @@
               contentType: 'application/json',
               processData: false,
               success: function(data, textStatus, xhr) {
+                  latlong_input_map.removeLayer(input_latlong_marker);
+                  input_latlong_marker = null;
                   $('#upload-modal').modal('hide');
                   get_pins();
               },

@@ -11,7 +11,7 @@ def latlng_from_exif(photo_path):
         raise NoGPSInfoException
     tags = {TAGS.get(t): v for t, v in image._getexif().items()}
 
-    if 2 not in tags['GPSInfo'] or 4 not in tags['GPSInfo']:
+    if 'GPSInfo' not in tags or 2 not in tags['GPSInfo'] or 4 not in tags['GPSInfo']:
         raise NoGPSInfoException
     n_sec = tags['GPSInfo'][2][2][0] / float(tags['GPSInfo'][2][2][1])
     n_min = tags['GPSInfo'][2][1][0] / float(tags['GPSInfo'][2][1][1])

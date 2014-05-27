@@ -38,17 +38,22 @@
 
     var input_latlong_marker = null;
     function onMapClick(e) {
-        if (input_latlong_marker !== null) return;
+        var update_inputs = function (latlng) {
+            $('[name=lat]').val(latlng.lat);
+            $('[name=lng]').val(latlng.lng);
+        }
 
-        input_latlong_marker = L.marker(e.latlng, {draggable:'true'});
-        input_latlong_marker.on('dragend', function(event){
-            var marker = event.target;
-            var position = marker.getLatLng();
-            marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
-            $('[name=lat]').val(position.lat);
-            $('[name=lng]').val(position.lng);
-        });
-        latlong_input_map.addLayer(input_latlong_marker);
+        if (input_latlong_marker !== null) {
+            input_latlong_marker.setLatLng(e.latlng);
+            update_inputs(e.latlng);
+        } else {
+            update_inputs(e.latlng)
+            input_latlong_marker = L.marker(e.latlng, {draggable:'true'});
+            input_latlong_marker.on('dragend', function(event){
+                update_inputs(input_latlong_marker.getLatLng());
+            });
+            latlong_input_map.addLayer(input_latlong_marker);
+        }
     };
     latlong_input_map.on('click', onMapClick);
 

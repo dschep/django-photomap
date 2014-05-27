@@ -7,7 +7,7 @@ class NoGPSInfoException(Exception): pass
 
 def latlng_from_exif(photo_path):
     image = Image.open(photo_path)
-    if not hasattr(image, '_getexif'):
+    if not hasattr(image, '_getexif') or image._getexif() is None:
         raise NoGPSInfoException
     tags = {TAGS.get(t): v for t, v in image._getexif().items()}
 

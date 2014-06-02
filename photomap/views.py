@@ -1,8 +1,6 @@
 import json
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+
+from six import BytesIO
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -24,7 +22,7 @@ class MapView(TemplateView):
 def thumb(request, image_id):
     image = Image.open(get_object_or_404(Photo, pk=image_id).image.path)
     thumb = ImageOps.fit(image, (50, 50) , Image.ANTIALIAS)
-    strio = StringIO()
+    strio = BytesIO()
     thumb.save(strio, 'JPEG')
     strio.seek(0)
     return HttpResponse(strio, content_type='image/jpeg')

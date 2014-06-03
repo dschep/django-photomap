@@ -67,7 +67,7 @@
                 $('#upload-modal').modal('hide');
             } else {
                 $('[name=resource_uri]').val(url);
-                $('#upload-form,#upload-submit').hide();
+                $('#upload-form').hide();
                 $('#update-form,#update-submit').show();
                 latlong_input_map.invalidateSize()
             }

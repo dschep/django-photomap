@@ -34,7 +34,7 @@
             <li><a href="#about" data-toggle="modal">About</a></li>
             <li><button type="button" class="btn btn-primary navbar-btn"
                 data-toggle="modal" data-target="#upload-modal"
-                onclick="$('#upload-form,#upload-submit').show();$('#update-form,#update-submit').hide();">
+                onclick="$('#upload-form').show();$('#update-form,#update-submit').hide();">
               <i class="glyphicon glyphicon-upload"></i>
               Add an image!</button></li>
           </ul>
@@ -75,7 +75,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-                    <button form="upload-form" type="submit" class="btn btn-primary" id="upload-submit">Upload Image</button>
                     <button form="update-form" type="submit" class="btn btn-primary" id="update-submit" style="display:none">Add Geolocation Info</button>
                 </div>
             </div>

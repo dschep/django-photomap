@@ -9,6 +9,5 @@ v1_api.register(PhotoResource())
 
 urlpatterns = patterns('photomap.views',
     url(r'^$', MapView.as_view(), name='map'),
-    url(r'^thumb/(?P<image_id>\d+)', 'thumb', name='thumb'),
     url(r'^api/', include(v1_api.urls)),
 )

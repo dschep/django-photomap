@@ -1,7 +1,10 @@
 from django.contrib.gis.db import models
+from stdimage import StdImageField
 
 class Photo(models.Model):
-    image = models.ImageField(upload_to='map-photo')
+    image = StdImageField(upload_to='map-photo', variations={
+        'thumbnail': (50, 50, True),
+        })
     location = models.PointField(srid=4326, null=True)
     user_session_key = models.CharField(max_length=40, null=True, blank=True)
 

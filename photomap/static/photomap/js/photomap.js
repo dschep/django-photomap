@@ -15,7 +15,7 @@
                     pointToLayer: function (feature, latlng) {
                         var thumb = L.divIcon({
                             className: 'thumb-marker',
-                            html: '<img src="/thumb/' + item.id + '">',
+                            html: '<img src="' + item.thumbnail + '">',
                             iconSize: [52, 52]
                         });
                         return L.marker(latlng, {icon: thumb})

@@ -1,4 +1,5 @@
 from tastypie.contrib.gis.resources import ModelResource
+from tastypie import fields
 from .models import Photo
 from .util import (MultipartResource, UserSessionKeyAuthorization,
                    geojson_from_exif, NoGPSInfoException)
@@ -14,6 +15,8 @@ class PhotoAuthorization(UserSessionKeyAuthorization):
 
 
 class PhotoResource(MultipartResource, ModelResource):
+    thumbnail = fields.FileField('image__thumbnail', readonly=True)
+
     class Meta:
         queryset = Photo.objects.all()
         authorization = PhotoAuthorization(

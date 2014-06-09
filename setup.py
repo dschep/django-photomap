@@ -45,7 +45,14 @@ setup(
 
     packages=['photomap'],
 
-    install_requires=['Django', 'Pillow', 'South', 'django-tastypie', 'six'],
+    install_requires=[
+        'Django',
+        'Pillow',
+        'South',
+        'django-tastypie',
+        'six',
+        'django-stdimage',
+        ],
 
     package_data={
         'photomap': ['static/photomap/*/*', 'templates/photomap/*'],

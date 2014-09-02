@@ -14,7 +14,7 @@ html, body, #map {
 .navbar {
     background: rgba(0, 0, 0, .8);
 }
-.navbar-brand {
+.navbar-brand.logo {
     padding: 0;
 }
 

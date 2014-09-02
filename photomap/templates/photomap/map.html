@@ -27,7 +27,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <span class="navbar-brand"><img src="{{ STATIC_URL }}{{ LOGO }}"></span>
+          {% if LOGO %}
+          <span class="navbar-brand logo"><img src="{{ STATIC_URL }}{{ LOGO }}"></span>
+          {% else %}
+          <span class="navbar-brand">{{ MAP_TITLE }}</span>
+          {% endif %}
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">

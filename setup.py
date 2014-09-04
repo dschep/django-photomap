@@ -52,6 +52,7 @@ setup(
         'django-tastypie',
         'six',
         'django-stdimage',
+        'django-appconf',
         ],
 
     package_data={
